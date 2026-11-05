@@ -275,7 +275,8 @@ export class CameraModel {
     mark.rotation.x = -Math.PI / 2;
     mark.position.set(x, y + 0.111, z);
     group.add(mark);
-    return group.children;
+    // Snapshot: callers reparent each child, which mutates the live children array.
+    return [...group.children];
   }
 
   private buildInternals() {

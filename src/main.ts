@@ -592,11 +592,10 @@ function wireEventListeners() {
     goToPose('hero', 1300);
   });
   on(getEl('playBtn'), 'click', () => {
+    // cancelShowcase() clears playTween, so read the playback state first.
+    const wasPlaying = playTween !== null;
     cancelShowcase();
-    if (playTween) {
-      cancelPlayTween();
-      return;
-    }
+    if (wasPlaying) return;
     const target = assembly >= 100 ? 0 : 100;
     setExplodeTarget(target, 1700);
     goToPose(target === 100 ? 'exploded' : 'hero', 1400);
